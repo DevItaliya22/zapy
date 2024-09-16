@@ -1,15 +1,14 @@
-// app/page.tsx
 "use client";
-
-import Navbar from "@/components/navbar";
-
-// import { useTheme } from "next-themes";
+import { LampComponent } from '@/components/landing/lamp'
+import Navbar from '@/components/landing/navbar'
 
 export default function Home() {
-  // const { theme, setTheme } = useTheme();
   return (
-    <main>
-      <Navbar></Navbar>
+    <main className="flex items-center justify-center flex-col">
+      <Navbar />
+      <section className=" w-[100vw]">
+        <LampComponent />
+      </section>
     </main>
-  );
+  )
 }
