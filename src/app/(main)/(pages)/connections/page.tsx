@@ -2,7 +2,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 
-const DashboardPage = () => {
+const Page = () => {
   const pathname = usePathname();
   const path = pathname.split('/').pop();
   const formattedPath = path
@@ -18,4 +18,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default Page;
