@@ -1,11 +1,11 @@
-import React from 'react'
+"use client";
+import React from "react";
 
-function Page() {
+const Billings = () => {
   return (
     <div>
-      billign
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Billings;

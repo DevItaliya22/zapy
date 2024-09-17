@@ -1,21 +1,32 @@
 "use client";
-import React from 'react';
-import { usePathname } from 'next/navigation';
+import React from "react";
+import ProfileForm from "@/components/forms/settingsForm";
 
-const Page = () => {
-  const pathname = usePathname();
-  const path = pathname.split('/').pop();
-  const formattedPath = path
-    ? path.charAt(0).toUpperCase() + path.slice(1).toLowerCase()
-    : '';
-
+const Settings = () => {
   return (
-    <div className="flex flex-col gap-4 relative">
-      <h1 className="text-4xl sticky top-0 z-[10] p-6 bg-background/50 backdrop-blur-lg flex items-center border-b rounded-3xl">
-        {formattedPath}
+    <div className="flex flex-col gap-4">
+      <h1 className="sticky top-0 z-[10] flex items-center justify-between border-b bg-background/50 p-6 text-4xl backdrop-blur-lg">
+        <span>Settings</span>
       </h1>
+      <div className="flex flex-col gap-10 p-6 w-[40%]">
+        <div>
+          <h2 className="text-2xl font-bold">User Profile</h2>
+          <p className="text-base text-white/50">
+            Add or update your information
+          </p>
+        </div>
+        {/* <ProfilePicture
+          onDelete={removeProfileImage}
+          userImage={user?.profileImage || ''}
+          onUpload={uploadProfileImage}
+        /> */}
+        <ProfileForm
+          user="user"
+          // onUpdate={updateUserInfo}
+        />
+      </div>
     </div>
   );
 };
 
-export default Page;
+export default Settings;
