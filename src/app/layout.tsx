@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,13 +12,17 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>)
+
+{
+  // console.log(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY)
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-         <ThemeProvider
+      <body className={`antialiased`}>
+        <ClerkProvider
+          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        >
+          <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
@@ -25,6 +30,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

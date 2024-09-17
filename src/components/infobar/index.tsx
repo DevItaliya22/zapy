@@ -2,6 +2,7 @@
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { UserIcon } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
 
 const InfoBar = () => {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ const InfoBar = () => {
         </h1>
         <div className="pr-4 pl-4 cursor-pointer "  onClick={()=>router.push("/settings")}>
           <UserIcon></UserIcon>
+          {/* <UserButton></UserButton> */}
         </div>
       </div>
     </div>

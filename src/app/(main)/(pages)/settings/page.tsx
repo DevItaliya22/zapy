@@ -1,43 +1,14 @@
 "use client"
 import ProfileForm from '@/components/forms/settingsForm'
 import React from 'react'
-import ProfilePicture from "./_components/profile_picture"
 // import { db } from '@/lib/db'
 // import { currentUser } from '@clerk/nextjs/server'
-
 
 const Settings =  () => {
   // const authUser = await currentUser()
   // if (!authUser) return null
 
   // const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
-  // const removeProfileImage = async () => {
-  //   'use server'
-  //   const response = await db.user.update({
-  //     where: {
-  //       clerkId: authUser.id,
-  //     },
-  //     data: {
-  //       profileImage: '',
-  //     },
-  //   })
-  //   return response
-  // }
-
-  // const uploadProfileImage = async (image: string) => {
-  //   'use server'
-  //   const id = authUser.id
-  //   const response = await db.user.update({
-  //     where: {
-  //       clerkId: id,
-  //     },
-  //     data: {
-  //       profileImage: image,
-  //     },
-  //   })
-
-  //   return response
-  // }
 
   // const updateUserInfo = async (name: string) => {
   //   'use server'
@@ -62,11 +33,6 @@ const Settings =  () => {
             Add or update your information
           </p>
         </div>
-        <ProfilePicture
-          onDelete={()=>{}}
-          userImage={ ''}
-          onUpload={()=>{}}
-        />
         <ProfileForm
           user={"user"}
           onUpdate={()=>{}}
