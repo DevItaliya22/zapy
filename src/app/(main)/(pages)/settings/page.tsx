@@ -3,7 +3,7 @@ import ProfileForm from '@/components/forms/settingsForm'
 import React from 'react'
 import ProfilePicture from "./_components/profile_picture"
 // import { db } from '@/lib/db'
-// import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs/server'
 
 
 const Settings =  () => {
