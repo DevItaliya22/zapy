@@ -5,13 +5,13 @@ const isPublicRoute = createRouteMatcher([
     '/api/clerk-webhook',
     '/api/drive-activity/notification',
     '/api/payment/success',
-    '/dashboard',
+    // '/dashboard'
 ])
 
 export default clerkMiddleware((auth, request) => {
-    // if (!isPublicRoute(request)) {
-    //     auth().protect()
-    // }
+    if (!isPublicRoute(request)) {
+        auth().protect()
+    }
 })
 
 export const config = {
