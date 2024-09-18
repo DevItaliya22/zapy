@@ -5,6 +5,8 @@ const isPublicRoute = createRouteMatcher([
     '/api/clerk-webhook',
     '/api/drive-activity/notification',
     '/api/payment/success',
+    "/sign-up(.*)",
+    "/sign-in(.*)",
     // '/dashboard'
 ])
 

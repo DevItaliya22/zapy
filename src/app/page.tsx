@@ -1,4 +1,3 @@
-"use client";
 import { LampComponent } from '@/components/landing/lamp'
 import Navbar from '@/components/landing/navbar'
 

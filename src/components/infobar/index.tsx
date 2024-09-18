@@ -18,8 +18,8 @@ const InfoBar = () => {
           {formattedPath}
         </h1>
         <div className="pr-4 pl-4 cursor-pointer "  onClick={()=>router.push("/settings")}>
-          <UserIcon></UserIcon>
-          {/* <UserButton></UserButton> */}
+          {/* <UserIcon></UserIcon> */}
+          <UserButton></UserButton>
         </div>
       </div>
     </div>
