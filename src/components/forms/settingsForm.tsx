@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -19,7 +19,7 @@ import { Loader2 } from 'lucide-react'
 
 type Props = {
   user: any
-  onUpdate?: any
+  onUpdate?: (name: string) => void
 }
 
 const ProfileForm = ({ user, onUpdate }: Props) => {
@@ -28,8 +28,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
     mode: 'onChange',
     resolver: zodResolver(EditUserProfileSchema),
     defaultValues: {
-      name: "user.name",
-      email: "user.email",
+      name: user.name
     },
   })
 
@@ -37,13 +36,11 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
     values: z.infer<typeof EditUserProfileSchema>
   ) => {
     setIsLoading(true)
-    await onUpdate(values.name)
+    if(onUpdate){
+      await onUpdate(values.name)
+    }
     setIsLoading(false)
   }
-
-  // useEffect(() => {
-  //   form.reset({ name: user.name, email: user.email })
-  // }, [user])
 
   return (
     <Form {...form}>
@@ -68,27 +65,9 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-lg">Email</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  disabled={true}
-                  placeholder="Email"
-                  type="email"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <Button
           type="submit"
-          className="self-start hover:bg-[#2F006B] hover:text-white "
+          className="self-start hover:bg-[#2F006B] hover:text-white"
         >
           {isLoading ? (
             <>

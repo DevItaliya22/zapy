@@ -1,31 +1,35 @@
-"use client"
 import ProfileForm from '@/components/forms/settingsForm'
 import React from 'react'
-// import { db } from '@/lib/db'
-// import { currentUser } from '@clerk/nextjs/server'
+import db from '@/lib/db'
+import { currentUser } from '@clerk/nextjs/server'
 
-const Settings =  () => {
-  // const authUser = await currentUser()
-  // if (!authUser) return null
+type Props = {}
 
-  // const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
+const Settings = async (props: Props) => {
+  const authUser = await currentUser()
+  if (!authUser) return null
 
-  // const updateUserInfo = async (name: string) => {
-  //   'use server'
+  const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
 
-  //   const updateUser = await db.user.update({
-  //     where: {
-  //       clerkId: authUser.id,
-  //     },
-  //     data: {
-  //       name,
-  //     },
-  //   })
-  //   return updateUser
-  // }
+  const updateUserInfo = async (name: string) => {
+    'use server'
+
+    const updateUser = await db.user.update({
+      where: {
+        clerkId: authUser.id,
+      },
+      data: {
+        name,
+      },
+    })
+    return updateUser
+  }
 
   return (
-    <div className="flex flex-col gap-4 w-[40%]">
+    <div className="flex flex-col gap-4">
+      <h1 className="sticky top-0 z-[10] flex items-center justify-between border-b bg-background/50 p-6 text-4xl backdrop-blur-lg">
+        <span>Settings</span>
+      </h1>
       <div className="flex flex-col gap-10 p-6">
         <div>
           <h2 className="text-2xl font-bold">User Profile</h2>
@@ -34,8 +38,8 @@ const Settings =  () => {
           </p>
         </div>
         <ProfileForm
-          user={"user"}
-          onUpdate={()=>{}}
+          user={user}
+          onUpdate={updateUserInfo}
         />
       </div>
     </div>

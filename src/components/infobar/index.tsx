@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { UserIcon } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 
 const InfoBar = () => {
@@ -17,8 +16,7 @@ const InfoBar = () => {
         <h1 className="">
           {formattedPath}
         </h1>
-        <div className="pr-4 pl-4 cursor-pointer "  onClick={()=>router.push("/settings")}>
-          {/* <UserIcon></UserIcon> */}
+        <div className="pr-4 pl-4 cursor-pointer ">
           <UserButton></UserButton>
         </div>
       </div>
