@@ -118,7 +118,6 @@ export const onCreateNodeTemplate = async (
       return 'Slack template saved'
     }
   }
-
   if (type === 'Notion') {
     const response = await db.workflows.update({
       where: {

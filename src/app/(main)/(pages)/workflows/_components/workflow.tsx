@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { toast } from 'sonner'
-import { onFlowPublish } from "../_actions/workflow-connections"
+import { onFlowPublish } from '../_actions/workflow-connections'
 
 type Props = {
   name: string
@@ -29,7 +29,7 @@ const Workflow = ({ description, id, name, publish }: Props) => {
   }
 
   return (
-    <Card className="flex w-full items-center justify-between mt-3">
+    <Card className="flex w-full items-center justify-between">
       <CardHeader className="flex flex-col gap-4">
         <Link href={`/workflows/editor/${id}`}>
           <div className="flex flex-row gap-2">
