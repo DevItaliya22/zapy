@@ -6,6 +6,7 @@
     "no-unused-vars": "off",
     "no-unused-imports": "off",
     "no-var": "off",
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/ban-types": [
       "error",
       {

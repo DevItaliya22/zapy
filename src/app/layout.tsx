@@ -30,7 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <ModalProvider>
-              {children}
+                {children}
             </ModalProvider>
           </ThemeProvider>
         </ClerkProvider>
