@@ -1,9 +1,9 @@
-'use client'
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { EditUserProfileSchema } from '@/lib/types'
+'use client';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { EditUserProfileSchema } from '@/lib/types';
 import {
   Form,
   FormControl,
@@ -11,35 +11,34 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import { Loader2 } from 'lucide-react'
+} from '../ui/form';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import { Loader2 } from 'lucide-react';
 
 type Props = {
-  user: any
-  onUpdate?: (name: string) => void
-}
+  user: any;
+  onUpdate?: (name: string) => Promise<void>;
+};
 
 const ProfileForm = ({ user, onUpdate }: Props) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof EditUserProfileSchema>>({
     mode: 'onChange',
     resolver: zodResolver(EditUserProfileSchema),
     defaultValues: {
-      name: user.name
+      name: user.name,
     },
-  })
+  });
 
-  const handleSubmit = async (
-    values: z.infer<typeof EditUserProfileSchema>
-  ) => {
-    setIsLoading(true)
-    if(onUpdate){
-      await onUpdate(values.name)
+  const handleSubmit = async (values: z.infer<typeof EditUserProfileSchema>) => {
+    setIsLoading(true);
+    if (onUpdate) {
+      await onUpdate(values.name);
     }
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
     <Form {...form}>
@@ -55,10 +54,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
             <FormItem>
               <FormLabel className="text-lg">User full name</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  placeholder="Name"
-                />
+                <Input {...field} placeholder="Name" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -66,6 +62,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
         />
         <Button
           type="submit"
+          disabled={isLoading}
           className="self-start hover:bg-[#2F006B] hover:text-white"
         >
           {isLoading ? (
@@ -79,7 +76,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
         </Button>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default ProfileForm
+export default ProfileForm;
