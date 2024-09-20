@@ -30,7 +30,7 @@ export const getFileMetaData = async () => {
 
   const drive = google.drive({ version: 'v3', auth: oauth2Client })
   const response = await drive.files.list()
-
+  console.log(response)
   if (response) {
     return response.data
   }

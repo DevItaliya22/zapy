@@ -16,57 +16,59 @@ export async function GET() {
     return NextResponse.json({ message: 'User not found' })
   }
 
-  const clerkResponse:any = await clerkClient.users.getUserOauthAccessToken(
-    userId,
-    'oauth_google'
-  )
+  try {
+    const clerkResponse:any = await clerkClient().users.getUserOauthAccessToken(userId, 'oauth_google')
+    if (!clerkResponse || !clerkResponse[0] || !clerkResponse[0].token) {
+      return NextResponse.json({ message: 'Failed to retrieve access token' }, { status: 400 })
+    }
 
-  const accessToken = clerkResponse[0].token
-  oauth2Client.setCredentials({
-    access_token: accessToken,
-  })
+    const accessToken = clerkResponse[0].token
+    oauth2Client.setCredentials({
+      access_token: accessToken,
+    })
 
-  const drive = google.drive({
-    version: 'v3',
-    auth: oauth2Client,
-  })
-  
-  const channelId = uuidv4()
+    const drive = google.drive({
+      version: 'v3',
+      auth: oauth2Client,
+    })
 
-  const startPageTokenRes = await drive.changes.getStartPageToken({})
-  const startPageToken = startPageTokenRes.data.startPageToken
-  if (startPageToken == null) {
-    throw new Error('startPageToken is unexpectedly null')
-  }
+    const channelId = uuidv4()
 
-  const listener = await drive.changes.watch({
-    pageToken: startPageToken,
-    supportsAllDrives: true,
-    supportsTeamDrives: true,
-    requestBody: {
-      id: channelId,
-      type: 'web_hook',
-      address:
-        `${process.env.NGROK_URI}/api/drive-activity/notification`,
-      kind: 'api#channel',
-    },
-  })
+    const startPageTokenRes = await drive.changes.getStartPageToken({})
+    const startPageToken = startPageTokenRes.data.startPageToken
+    if (!startPageToken) {
+      throw new Error('startPageToken is unexpectedly null')
+    }
 
-  if (listener.status == 200) {
-    //if listener created store its channel id in db
-    const channelStored = await db.user.updateMany({
-      where: {
-        clerkId: userId,
-      },
-      data: {
-        googleResourceId: listener.data.resourceId,
+    const listener = await drive.changes.watch({
+      pageToken: startPageToken,
+      supportsAllDrives: true,
+      supportsTeamDrives: true,
+      requestBody: {
+        id: channelId,
+        type: 'web_hook',
+        address: `${process.env.NEXT_PUBLIC_URL}/api/drive-activity/notification`,
+        kind: 'api#channel',
       },
     })
 
-    if (channelStored) {
-      return new NextResponse('Listening to changes...')
-    }
-  }
+    if (listener.status === 200) {
+      const channelStored = await db.user.updateMany({
+        where: {
+          clerkId: userId,
+        },
+        data: {
+          googleResourceId: listener.data.resourceId,
+        },
+      })
 
-  return new NextResponse('Oops! something went wrong, try again')
+      if (channelStored) {
+        return new NextResponse('Listening to changes...')
+      }
+    }
+
+    return new NextResponse('Oops! something went wrong, try again')
+  } catch (error:any) {
+    return NextResponse.json({ message: error.message }, { status: 500 })
+  }
 }

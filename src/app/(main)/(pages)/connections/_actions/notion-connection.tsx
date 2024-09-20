@@ -122,6 +122,7 @@ export const onCreateNewPageInDatabase = async (
         title: [
           {
             text: {
+              // WIP :content should be a string
               content: content,
             },
           },

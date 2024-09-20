@@ -55,7 +55,7 @@ const ContentBasedOnTitle = ({
   useEffect(() => {
     const reqGoogle = async () => {
       const response: { data: { message: { files: any } } } = await axios.get(
-        'https://localhost:3000/api/drive'
+        '/api/drive'
       )
       if (response) {
         console.log(response.data.message.files[0])
@@ -66,7 +66,7 @@ const ContentBasedOnTitle = ({
       }
     }
     reqGoogle()
-  },[setFile])
+  }, [])
 
 // @ts-expect-error idfc
   const nodeConnectionType: any = nodeConnection[nodeMapper[title]]
