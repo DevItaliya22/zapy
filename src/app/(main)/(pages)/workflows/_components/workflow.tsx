@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { toast } from 'sonner'
 import { onFlowPublish } from '../_actions/workflow-connections'
+import { revalidatePath } from 'next/cache'
 
 type Props = {
   name: string
@@ -27,6 +28,7 @@ const Workflow = ({ description, id, name, publish }: Props) => {
       event.target.ariaChecked === 'false'
     )
     if (response) toast.message(response)
+      revalidatePath('/workflows')
   }
 
   return (

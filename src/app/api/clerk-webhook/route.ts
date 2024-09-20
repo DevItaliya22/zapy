@@ -3,7 +3,7 @@ import db from "@/lib/db";
 
 export async function POST( req: Request){
     //here basically clerk gives us a webhook when a user login / signup
-    console.log("hell111o");
+    // console.log("hell111o");
     try{
         const body = await req.json();
         const data = body?.data;
@@ -24,7 +24,7 @@ export async function POST( req: Request){
                 name : data.first_name || '',
             }
         })
-        console.log(user);
+        // console.log(user);
         return new NextResponse('User updated or inserted in database successfully', {
             status: 200,
         })
