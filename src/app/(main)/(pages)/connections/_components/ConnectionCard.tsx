@@ -60,7 +60,7 @@ const ConnectionCard = ({
             }
             className=" rounded-lg bg-primary p-2 font-bold text-primary-foreground"
           >
-            Connect
+            Connect 
           </Link>
         )}
       </div>

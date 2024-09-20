@@ -15,7 +15,7 @@ import { onContentChange } from '@/lib/editor-utils'
 import GoogleFileDetails from './google-file-details'
 import GoogleDriveFiles from './google-drive-files'
 import ActionButton from './action-button'
-// import { getFileMetaData } from '@/app/(main)/(pages)/connections/_actions/google-connection'
+import { getFileMetaData } from '@/app/(main)/(pages)/connections/_actions/google-connection'
 import axios from 'axios'
 import { toast } from 'sonner'
 
@@ -55,7 +55,7 @@ const ContentBasedOnTitle = ({
   useEffect(() => {
     const reqGoogle = async () => {
       const response: { data: { message: { files: any } } } = await axios.get(
-        '/api/drive'
+        'https://localhost:3000/api/drive'
       )
       if (response) {
         console.log(response.data.message.files[0])
