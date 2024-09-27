@@ -7,7 +7,6 @@
 .yarn/install-state.gz
 
 # testing
-.env
 /coverage
 
 # next.js
@@ -39,3 +38,4 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+config.bat
